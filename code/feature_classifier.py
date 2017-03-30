@@ -1,48 +1,13 @@
-# -----Logging Parameters-----
-LOG_PARAM = {
-    'logging' : True,
-    'logfile' : open('logs/feature_log.txt', 'w')
-}
-
-# -----Neural Network Parameters-----
-NN_PARAM = {
-    'layer1_neurons': 256,
-    'layer2_neurons': 512,
-    'layer3_neurons': 256,
-    'output_classes': 5,
-    'dropout': True,
-    'keep_prob': 0.7,
-    'l2_reg': True,
-    'beta': 5e-3,
-    'batch_size': 32,
-    'num_steps': 10001,
-    'learning_rate': 0.001,
-    'decay_steps': 500,
-    'decay_rate': 0.95,
-    'staircase': True,
-    'verbose' : False
-}
-
-# -----Grid Search Parameters-----
-GRID_SEARCH_PARAM = {
-    'DecisionTreeClassifier': {'min_samples_split': [80, 120, 160]},
-    'RandomForestClassifier': {'n_estimators': [100, 150, 200],
-                               'min_samples_split': [80, 120, 160]},
-    'AdaBoostClassifier': {'learning_rate': [0.7, 0.8, 0.9]},
-    'LogisticRegression': {'C': [0.001, 0.01, 0.1],
-                           'solver': ['newton-cg', 'lbfgs']},
-    'SGDClassifier': {'loss': ['hinge', 'log'],
-                      'penalty': ['none', 'l2', 'l1']}
-}
-
 from nn_functions import run_tf_nn
-from feature_functions import *
+from feature_functions import get_data, printer, run_base_classifiers
 
 # -----CLASSIFIERS-----
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
+
+from sklearn.model_selection import train_test_split
 
 def main():
     train_pickle_file = '../data/pickles/train_data.pkl'
@@ -51,8 +16,18 @@ def main():
     df_train = get_data(train_pickle_file)
     df_test = get_data(test_pickle_file)
 
-    print(df_train.shape)
-    print(df_test.shape)
+    y = df_train['species_num']
+    X = df_train.drop(['id', 'species_num'], axis=1)
+
+    X_train, y_train, X_test, y_test = train_test_split(X, y,
+                                        test_size=0.2,
+                                        random_state=0)
+
+    results = run_tf_nn(X_train, y_train, X_test, y_test)
+
+    printer(results, pretty=True)
+
+
 
 if __name__=='__main__':
     main()

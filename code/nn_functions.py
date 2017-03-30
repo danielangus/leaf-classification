@@ -5,11 +5,12 @@ from time import time
 from tqdm import tqdm
 
 from feature_functions import printer
-from feature_classifier import NN_PARAM
+from parameters import NN_PARAM
 
 def one_hot_encode(data):
     # helper function to one-hot encode labels
-    newdata = (np.arange(5) == data[:, None]).astype(np.float32)
+    num_classes = NN_PARAM['output_classes']
+    newdata = (np.arange(num_classes) == data[:, None]).astype(np.float32)
     return newdata
 
 def accuracy(predictions, labels):

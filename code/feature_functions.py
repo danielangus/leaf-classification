@@ -11,8 +11,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 # -----PARAMETERS-----
-from feature_classifier import LOG_PARAM
-from feature_classifier import GRID_SEARCH_PARAM
+from parameters import LOG_PARAM
+from parameters import GRID_SEARCH_PARAM
 
 # -----Processing Functions-----
 def get_data(pickle_file):
@@ -32,7 +32,7 @@ def get_data(pickle_file):
 def printer(args, pretty=False):
     # printer function to handle cases with logging and pretty printing
     logging = LOG_PARAM['logging']
-    logfile = open('log.txt', 'w')
+    logfile = LOG_PARAM['logfile']
     if logging and not pretty:
         print('\n', args, end="", file=logfile)
         print(args)
