@@ -1,9 +1,3 @@
-# -----Logging Parameters-----
-LOG_PARAM = {
-    'logging' : True,
-    'logfile' : open('logs/feature_log.txt', 'w')
-}
-
 # -----Neural Network Parameters-----
 NN_PARAM = {
     'layer1_neurons': 256,
@@ -25,13 +19,12 @@ NN_PARAM = {
 
 # -----Grid Search Parameters-----
 GRID_SEARCH_PARAM = {
-    'DecisionTreeClassifier': {'min_samples_split': [80, 120, 160]},
-    'RandomForestClassifier': {'n_estimators': [100, 150, 200],
-                               'min_samples_split': [80, 120, 160]},
-    'AdaBoostClassifier': {'learning_rate': [0.7, 0.8, 0.9]},
-    'LogisticRegression': {'C': [0.001, 0.01, 0.1],
-                           'solver': ['newton-cg', 'lbfgs']},
+    'DecisionTreeClassifier': {'min_samples_split': [2,3,4,5]},
+    'RandomForestClassifier': {'n_estimators': [100, 150, 200, 250],
+                               'min_samples_split': [2, 3, 4, 5]},
+    'AdaBoostClassifier': {'learning_rate': [0.01, 0.05, 0.1]},
+    'LogisticRegression': {'C': [15.0, 20.0, 25.0],
+                           'solver': ['liblinear', 'newton-cg', 'lbfgs']},
     'SGDClassifier': {'loss': ['hinge', 'log'],
                       'penalty': ['none', 'l2', 'l1']}
 }
-
