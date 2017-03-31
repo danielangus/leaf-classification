@@ -22,4 +22,16 @@ There are three sets of features in the csv file:
 * shape - describes the shape of the leaf
 * margin - describes the fine details of the leaf
 * texture - descibes the interior structure of the leaf
+
 Each of the three feature sets contains 64 columns, for a total of 192 extracted features.
+
+### Solution Statement
+
+An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.05 log loss on the testing set. 
+
+### Benchmark Model
+
+As a sample solution to this problem, Kaggle provides a sample submission is which each test instance is assigned equal probability of being each of the 99 classes. Any submission scoring better than this can be said to be better than random, and so this is a good benchmark. The sample submission scores 4.6 on log loss.
+
+### Evaluation Metrics
+
