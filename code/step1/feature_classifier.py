@@ -3,9 +3,11 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
+from sklearn.svm import SVC
 
 from sklearn.model_selection import train_test_split
 from feature_functions import get_data, train_classifier, format_submissions
+
 
 def get_classifier_list():
 
@@ -15,17 +17,20 @@ def get_classifier_list():
     classifier_list.append(AdaBoostClassifier(random_state=2))
     classifier_list.append(LogisticRegression(random_state=3))
     classifier_list.append(SGDClassifier(random_state=4))
+    classifier_list.append(SVC(random_state=5))
+
 
     return classifier_list
 
-
 def main():
-    train_pickle_file = '../data/pickles/train_data.pkl'
-    test_pickle_file = '../data/pickles/test_data.pkl'
+    # Get data pickled in exploratory analysis
+    train_pickle_file = '../../data/pickles/train_data.pkl'
+    test_pickle_file = '../../data/pickles/test_data.pkl'
 
     df_train = get_data(train_pickle_file)
     df_test = get_data(test_pickle_file)
 
+    # Make training and validation sets
     y = df_train['species_num']
     X = df_train.drop(['id', 'species_num'], axis=1)
 
@@ -33,16 +38,17 @@ def main():
                                         test_size=0.2,
                                         random_state=0)
 
+    # Train classifiers on the data and get the best estimators
     classifier_list = get_classifier_list()
     results = list()
 
     for classifier in classifier_list:
         results.append(train_classifier(classifier, X_train, y_train, X_valid, y_valid))
 
+    # Run the best estimator on the test data and format it as a submission
     for result in results:
         best_estimator = result['best_estimator']
         format_submissions(best_estimator, df_test)
-
 
 
 if __name__=='__main__':

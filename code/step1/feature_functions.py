@@ -1,17 +1,12 @@
-# -----MAIN LIBRARIES-----
-import numpy as np
 import pandas as pd
-# -----HELPER LIBRARIES-----
 import pickle
-from pprint import pprint
 from time import time
-# -----SCORING AND MODEL SELECTION-----
+
 from sklearn.metrics import make_scorer
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
-# -----PARAMETERS-----
+
 from parameters import GRID_SEARCH_PARAM
 
 
@@ -77,7 +72,7 @@ def train_classifier(learner, X_train, y_train, X_valid, y_valid):
 
 def format_submissions(learner, df_test):
 
-    sample_submission_file = '../submissions/sample_submission.csv'
+    sample_submission_file = '../../submissions/sample_submission.csv'
     df_sample = pd.read_csv(sample_submission_file)
 
     df_submission = pd.DataFrame(columns=df_sample.columns)
@@ -101,5 +96,5 @@ def format_submissions(learner, df_test):
             col = classnum_to_name(j)
             df_submission.set_value(i,col,p)
 
-    new_sub_file = '../submissions/' + learner.__class__.__name__ + '.csv'
+    new_sub_file = '../../submissions/' + learner.__class__.__name__ + '.csv'
     df_submission.to_csv(new_sub_file, index=False)
