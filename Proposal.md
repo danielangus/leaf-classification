@@ -27,7 +27,7 @@ Each of the three feature sets contains 64 columns, for a total of 192 extracted
 
 ### Solution Statement
 
-An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.05 log loss on the testing set. 
+An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set. 
 
 ### Benchmark Model
 
@@ -35,3 +35,13 @@ As a sample solution to this problem, Kaggle provides a sample submission is whi
 
 ### Evaluation Metrics
 
+Kaggle uses log loss to grade the score on the testing set. Essentially, for each of the test instances, the classifier predicts the probability that the instance is one of the 99 classes. Log loss is then calculated as the negative sum of the average products between true classes and the log of predicted probabilities. In practice, this serves to penalize incorrect class predictions [source: http://www.exegetic.biz/blog/2015/12/making-sense-logarithmic-loss/]
+
+### Project Design
+
+The project will proceed as follows.
+
+* Exploratory Analysis: examine the features and normalize to [0, 1]
+* Step 1: train a variety of classifiers from sk-learn on the pre-extracted features. I will use stratified k-fold cross validation to ensure there are samples of each leaf among each fold. Grid search will be used lightly to make sure some important parameters are in the right neighbourhood. 
+* Step 2: select the best-performing algorithm and perform a better optimization. This will involve providing several values for paramters in the grid search. I will also try scorers other than accuracy, like F-beta and log loss.
+* Step 3: apply a TensorFlow neural network to classify the images. First I will try a deep neural network on the pre-extracted features, and then perhaps a convolutional neural network on the images. 
