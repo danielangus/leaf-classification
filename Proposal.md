@@ -13,7 +13,7 @@ The goal of this project is to classify leaves from various species of plants. T
 
 ### Problem Statement
 
-The problem is to correctly identify 99 different species of plants from their leaves.
+The problem is to correctly classify 99 different species of plants from their leaves. Each leaf is scanned, white on a black background. There is also a set of 192 extracted features from each leaf to aid in classification. This is a multi-class problem with 99 output classes. 
 
 ### Datasets and Inputs
 
@@ -23,11 +23,11 @@ There are three sets of features in the csv file:
 * margin - describes the fine details of the leaf
 * texture - descibes the interior structure of the leaf
 
-Each of the three feature sets contains 64 columns, for a total of 192 extracted features.
+Each of the three feature sets contains 64 columns, for a total of 192 extracted features. The data can be found here: https://www.kaggle.com/c/leaf-classification/data
 
 ### Solution Statement
 
-An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set. 
+In order to complete this problem, I will use both the extracted features and images to create an effective classifier. An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set.
 
 ### Benchmark Model
 
