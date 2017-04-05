@@ -27,7 +27,9 @@ Each of the three feature sets contains 64 columns, for a total of 192 extracted
 
 ### Solution Statement
 
-In order to complete this problem, I will use both the extracted features and images to create an effective classifier. An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set.
+In order to complete this problem, I will use the extracted features to build an effective leaf classifier. I chose not to use the images for two reasons. The first is that a typical effective strategy for classifying images is through a convolutional neural network (CNN). To implement a CNN, the images would have to be resized, which would eliminate some of the disinguishing characteristics of the leaves - their edges. The second reason for not using the image data is that the extracted features contain most or all of the information that can be gleaned from images, and so it would be redundant to make a classifier that uses them. 
+
+An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set.
 
 ### Benchmark Model
 
@@ -35,7 +37,7 @@ As a sample solution to this problem, Kaggle provides a sample submission is whi
 
 ### Evaluation Metrics
 
-Kaggle uses log loss to grade the score on the testing set. Essentially, for each of the test instances, the classifier predicts the probability that the instance is one of the 99 classes. Log loss is then calculated as the negative sum of the average products between true classes and the log of predicted probabilities. In practice, this serves to penalize incorrect class predictions [source: http://www.exegetic.biz/blog/2015/12/making-sense-logarithmic-loss/]
+I will use log loss to grade the score on the testing set. Essentially, for each of the test instances, the classifier predicts the probability that the instance is one of the 99 classes. Log loss is then calculated as the negative sum of the average products between true classes and the log of predicted probabilities. This is effective for multi-class problems because, in practice, it serves to penalize incorrect class predictions [source: http://www.exegetic.biz/blog/2015/12/making-sense-logarithmic-loss/]. 
 
 ### Project Design
 
@@ -43,5 +45,5 @@ The project will proceed as follows.
 
 * Exploratory Analysis: examine the features and normalize to [0, 1]
 * Step 1: train a variety of classifiers from sk-learn on the pre-extracted features. I will use stratified k-fold cross validation to ensure there are samples of each leaf among each fold. Grid search will be used lightly to make sure some important parameters are in the right neighbourhood. 
-* Step 2: select the best-performing algorithm and perform a better optimization. This will involve providing several values for paramters in the grid search. I will also try scorers other than accuracy, like F-beta and log loss.
-* Step 3: apply a TensorFlow neural network to classify the images. First I will try a deep neural network on the pre-extracted features, and then perhaps a convolutional neural network on the images. 
+* Step 2: train a keras neural network on the features. It will be kept shallow and relatively simple to get a feel for how keras performs on this data set.
+* Step 3: select the best-performing algorithm and perform a better optimization. If this is an sk-learn algorithm, this will involve providing several values for paramters in the grid search. If it is the keras neural network, it will involve adding more layers and adjusting parameters in order to better the algorithm's performance. 
