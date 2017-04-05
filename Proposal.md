@@ -27,17 +27,19 @@ Each of the three feature sets contains 64 columns, for a total of 192 extracted
 
 ### Solution Statement
 
-In order to complete this problem, I will use the extracted features to build an effective leaf classifier. I chose not to use the images for two reasons. The first is that a typical effective strategy for classifying images is through a convolutional neural network (CNN). To implement a CNN, the images would have to be resized, which would eliminate some of the disinguishing characteristics of the leaves - their edges. The second reason for not using the image data is that the extracted features contain most or all of the information that can be gleaned from images, and so it would be redundant to make a classifier that uses them. 
+In order to complete this problem, I will use the extracted features to build a leaf classifier. I chose not to use the images for two reasons. The first is that a typical effective strategy for classifying images is through a convolutional neural network (CNN). To implement a CNN, the images would have to be resized, which would eliminate some of the disinguishing characteristics of the leaves - their edges. The second reason for not using the image data is that the extracted features contain most or all of the information that can be gleaned from images, and so it would be redundant to make a classifier that uses them. 
 
-An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set.
+An adequate solution to this problem is having at least 99% accuracy on a validation set and under 0.1 log loss on the testing set. The validation set will be created during training and the testing set is provided by Kaggle.
 
 ### Benchmark Model
 
-As a sample solution to this problem, Kaggle provides a sample submission is which each test instance is assigned equal probability of being each of the 99 classes. Any submission scoring better than this can be said to be better than random, and so this is a good benchmark. The sample submission scores 4.6 on log loss.
+As a sample solution to this problem, Kaggle provides a submission in which each test instance is assigned equal probability of being each of the 99 classes. Any submission scoring better than this can be said to be better than random, and so this is a good benchmark. The sample submission scores 4.6 on log loss.
 
 ### Evaluation Metrics
 
-I will use log loss to grade the score on the testing set. Essentially, for each of the test instances, the classifier predicts the probability that the instance is one of the 99 classes. Log loss is then calculated as the negative sum of the average products between true classes and the log of predicted probabilities. This is effective for multi-class problems because, in practice, it serves to penalize incorrect class predictions [source: http://www.exegetic.biz/blog/2015/12/making-sense-logarithmic-loss/]. 
+I will use accuracy to grade the score on the validation set. I chose accuracy because it quantifies an effective classifier for this problem. We ultimately wish to know how well the classifier can correctly predict previously unseen instances, and accuracy is a good metric to measure this goal.
+
+Kaggle uses log loss to grade the score on the testing set. Essentially, for each of the test instances, the classifier predicts the probability that the instance is one of the 99 classes. Log loss is then calculated as the negative sum of the average products between true classes and the log of predicted probabilities. This is effective for multi-class problems because, in practice, it serves to penalize incorrect class predictions [source: http://www.exegetic.biz/blog/2015/12/making-sense-logarithmic-loss/].
 
 ### Project Design
 
