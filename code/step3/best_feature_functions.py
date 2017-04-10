@@ -8,7 +8,7 @@ from sklearn.metrics import log_loss
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 
-from parameters import GRID_SEARCH_PARAM
+from best_parameters import GRID_SEARCH_PARAM
 
 
 def get_data(pickle_file):
@@ -97,5 +97,5 @@ def format_submissions(learner, df_test):
             col = classnum_to_name(j)
             df_submission.set_value(i,col,p)
 
-    new_sub_file = '../../submissions/' + 'LogLoss' + learner.__class__.__name__ + '.csv'
+    new_sub_file = '../../submissions/' + 'Best' + learner.__class__.__name__ + '.csv'
     df_submission.to_csv(new_sub_file, index=False)

@@ -1,4 +1,5 @@
 # -----Grid Search Parameters-----
+
 GRID_SEARCH_PARAM = {
     'LogisticRegression': {'C': [50.0, 75.0, 100.0, 125.0, 150.0, 200.0],
                            'solver': ['newton-cg', 'lbfgs'],
