@@ -8,7 +8,7 @@ from sklearn.metrics import log_loss
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 
-from parameters import GRID_SEARCH_PARAM
+from best_parameters import GRID_SEARCH_PARAM
 
 
 def get_data(pickle_file):

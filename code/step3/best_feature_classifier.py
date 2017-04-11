@@ -2,7 +2,7 @@
 from sklearn.linear_model import LogisticRegression
 
 from sklearn.model_selection import train_test_split
-from feature_functions import get_data, train_classifier, format_submissions
+from best_feature_functions import get_data, train_classifier, format_submissions
 
 
 def main():
