@@ -66,6 +66,6 @@ sample_submission_file = '../../submissions/sample_submission.csv'
 df_sample = pd.read_csv(sample_submission_file)
 ids = df_sample['id']
 df_sample = df_sample.drop(['id'], axis=1)
-outputs = pd.DataFrame(output_preds, columns=df_sample.columns).round()
+outputs = pd.DataFrame(output_preds, columns=df_sample.columns)
 outputs['id'] = ids
-outputs.to_csv('../../submissions/nn_rounded.csv', index=False)
+outputs.to_csv('../../submissions/nn.csv', index=False)
